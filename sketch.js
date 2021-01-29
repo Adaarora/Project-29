@@ -8,7 +8,7 @@ var engine, world;
 
 
 function preload() {
-
+    polygon_img=loadImage("polygon.png");
 }
 
 function setup() {
@@ -47,13 +47,15 @@ function setup() {
     block24 = new Box(1030, 225, 30, 40);
     block25 = new Box(1060, 225, 30, 40);
 
-    sling = new Slingshot(this.polygon,{x:100,y:200});
-
-
-    polygon = Bodies.circle(50,200,20);
-    World.add(world,polygon);
-
     
+
+
+    //ball holder with slings
+  ball = Bodies.circle(50,200,20);
+  World.add(world,ball);
+
+  slingShot = new Slingshot(this.ball,{x:100,y:200});
+
 
 }
 
@@ -89,7 +91,18 @@ function draw() {
     block24.display();
     block25.display();
 
-    sling.display();
+    slingShot.display();
+    imageMode(CENTER)
+    image(polygon_img ,ball.position.x,ball.position.y,40,40);
 
 
+}
+
+function mouseDragged(){
+    Matter.Body.setPosition(ball.body, {x: mouseX , y: mouseY});
+}
+
+
+function mouseReleased(){
+    slingshot.fly();
 }
