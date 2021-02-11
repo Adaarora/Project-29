@@ -8,7 +8,7 @@ var engine, world;
 
 
 function preload() {
-    polygon_img=loadImage("polygon.png");
+    polygon_img = loadImage("polygon.png");
 }
 
 function setup() {
@@ -47,20 +47,22 @@ function setup() {
     block24 = new Box(1030, 225, 30, 40);
     block25 = new Box(1060, 225, 30, 40);
 
-    
+
 
 
     //ball holder with slings
-  ball = Bodies.circle(50,200,20);
-  World.add(world,ball);
+    ball = Bodies.circle(50, 200, 20);
+    World.add(world, ball);
 
-  slingShot = new Slingshot(this.ball,{x:100,y:200});
+    slingShot = new Slingshot(this.ball, { x: 100, y: 200 });
 
 
 }
 
 function draw() {
     background(0);
+
+    Engine.update(engine);
 
     ground.display();
     ground1.display();
@@ -93,16 +95,16 @@ function draw() {
 
     slingShot.display();
     imageMode(CENTER)
-    image(polygon_img ,ball.position.x,ball.position.y,40,40);
+    image(polygon_img, ball.position.x, ball.position.y, 40, 40);
 
 
 }
 
-function mouseDragged(){
-    Matter.Body.setPosition(ball.body, {x: mouseX , y: mouseY});
+function mouseDragged() {
+    Matter.Body.setPosition(this.ball, { x: mouseX, y: mouseY });
 }
 
 
-function mouseReleased(){
-    slingshot.fly();
+function mouseReleased() {
+    slingShot.fly();
 }
